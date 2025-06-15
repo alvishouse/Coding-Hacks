@@ -175,8 +175,9 @@
         
         @media print {
             body {
-                background: white;
-                color: black;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                print-color-adjust: exact;
                 padding: 20px;
             }
             
@@ -185,24 +186,17 @@
             }
             
             .section {
-                background: white;
-                border: 1px solid #ddd;
                 break-inside: avoid;
                 margin-bottom: 20px;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                print-color-adjust: exact;
             }
             
-            .main-title {
-                color: #333;
-                -webkit-text-fill-color: #333;
-            }
-            
-            .subtitle, .section-title {
-                color: #333;
-            }
-            
-            .code-block, .table-example {
-                background: #f5f5f5;
-                border-left: 4px solid #666;
+            .main-title, .subtitle, .section-title, .code-block, .table-example {
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                print-color-adjust: exact;
             }
         }
         
