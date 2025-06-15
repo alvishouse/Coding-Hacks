@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Cheat Sheet and Notebook</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .main-title {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffa726, #ff9800, #ff6f00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 20px rgba(255, 167, 38, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #e0e0e0;
+            letter-spacing: 2px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #ffa726;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(135deg, #ffa726, #ff6f00);
+            border-radius: 2px;
+        }
+        
+        .code-block {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffa726;
+            margin: 10px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        
+        .syntax-item {
+            margin: 12px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .syntax-item:last-child {
+            border-bottom: none;
+        }
+        
+        .syntax-label {
+            color: #b0bec5;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .syntax-code {
+            font-family: 'JetBrains Mono', monospace;
+            color: #81c784;
+            font-size: 0.85rem;
+        }
+        
+        .table-section {
+            grid-column: 1 / -1;
+        }
+        
+        .table-example {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ffa726;
+            white-space: pre-line;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #90a4ae;
+            letter-spacing: 3px;
+        }
+        
+        .print-btn {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #ffa726, #ff6f00);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 167, 38, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 167, 38, 0.4);
+        }
+        
+        @media print {
+            body {
+                background: white;
+                color: black;
+                padding: 20px;
+            }
+            
+            .print-btn {
+                display: none;
+            }
+            
+            .section {
+                background: white;
+                border: 1px solid #ddd;
+                break-inside: avoid;
+                margin-bottom: 20px;
+            }
+            
+            .main-title {
+                color: #333;
+                -webkit-text-fill-color: #333;
+            }
+            
+            .subtitle, .section-title {
+                color: #333;
+            }
+            
+            .code-block, .table-example {
+                background: #f5f5f5;
+                border-left: 4px solid #666;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .print-btn {
+                top: 15px;
+                right: 15px;
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">📄 Print PDF</button>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">MARKDOWN</h1>
+            <h2 class="subtitle">CHEAT SHEET AND NOTEBOOK</h2>
+        </div>
+        
+        <div class="grid">
+            <!-- Headings Section -->
+            <div class="section">
+                <h3 class="section-title">Headings</h3>
+                <div class="syntax-item">
+                    <div class="syntax-label">Heading 1</div>
+                    <div class="syntax-code"># H1</div>
+                </div>
+                <div class="syntax-item">
+                    <div class="syntax-label">Heading 2</div>
+                    <div class="syntax-code">## H2</div>
+                </div>
+                <div class="syntax-item">
+                    <div class="syntax-label">Heading 3</div>
+                    <div class="syntax-code">### H3</div>
+                </div>
+                <div class="syntax-item">
+                    <div class="syntax-label">Heading 4</div>
+                    <div class="syntax-code">#### H4</div>
+                </div>
+                <div class="syntax-item">
+                    <div class="syntax-label">Heading 5</div>
+                    <div class="syntax-code">##### H5</div>
+                </div>
+                <div class="syntax-item">
+                    <div class="syntax-label">Heading 6</div>
+                    <div class="syntax-code">###### H6</div>
+                </div>
+            </div>
+            
+            <!-- Task List Section -->
+            <div class="section">
+                <h3 class="section-title">Task List</h3>
+                <div class="syntax-item">
+                    <div class="syntax-label">Completed task</div>
+                    <div class="syntax-code">- [x] Task 1</div>
+                </div>
+                <div class="syntax-item">
+                    <div class="syntax-label">Incomplete tasks</div>
+                    <div class="syntax-code">- [ ] Task 2<br>- [ ] Task 3</div>
+                </div>
+            </div>
+            
+            <!-- Emphasis Section -->
+            <div class="section">
+                <h3 class="section-title">Emphasis</h3>
+                <div class="syntax-item">
+                    <div class="syntax-label">Italic</div>
+                    <div class="syntax-code">*Italic* or _Italic_</div>
+                </div>
+                <div class="syntax-item">
+                    <div class="syntax-label">Bold</div>
+                    <div class="syntax-code">**Bold** or __Bold__</div>
+                </div>
+                <div class="syntax-item">
+                    <div class="syntax-label">Bold and Italic</div>
+                    <div class="syntax-code">***Bold and Italic***</div>
+                </div>
+            </div>
+            
+            <!-- Images Section -->
+            <div class="section">
+                <h3 class="section-title">Images</h3>
+                <div class="syntax-item">
+                    <div class="syntax-label">Image syntax</div>
+                    <div class="syntax-code">![Alt Text](Image URL)</div>
+                </div>
+            </div>
+            
+            <!-- Unordered List Section -->
+            <div class="section">
+                <h3 class="section-title">Unordered List</h3>
+                <div class="code-block">- First item
+- Second item
+  - First nested item
+  - Second nested item
+- Third item</div>
+            </div>
+            
+            <!-- Blockquotes Section -->
+            <div class="section">
+                <h3 class="section-title">Blockquotes</h3>
+                <div class="syntax-item">
+                    <div class="syntax-label">Quote syntax</div>
+                    <div class="syntax-code">> Lorem Ipsum</div>
+                </div>
+            </div>
+            
+            <!-- Ordered List Section -->
+            <div class="section">
+                <h3 class="section-title">Ordered List</h3>
+                <div class="code-block">1. First item
+2. Second item
+   1. First nested item
+   2. Second nested
+3. Third item</div>
+            </div>
+            
+            <!-- Inline Code Section -->
+            <div class="section">
+                <h3 class="section-title">Inline Code</h3>
+                <div class="syntax-item">
+                    <div class="syntax-label">Inline code syntax</div>
+                    <div class="syntax-code">`Inline Code`</div>
+                </div>
+            </div>
+            
+            <!-- Links Section -->
+            <div class="section">
+                <h3 class="section-title">Links</h3>
+                <div class="syntax-item">
+                    <div class="syntax-label">Link syntax</div>
+                    <div class="syntax-code">A link to [Infinite Boop](http://infiniteboop.com "Infinite Boop")</div>
+                </div>
+            </div>
+            
+            <!-- Code Block Section -->
+            <div class="section">
+                <h3 class="section-title">Code Block</h3>
+                <div class="code-block">```python
+def function():
+    print("Hello, world!")
+```</div>
+            </div>
+            
+            <!-- Horizontal Rule Section -->
+            <div class="section">
+                <h3 class="section-title">Horizontal Rule</h3>
+                <div class="syntax-item">
+                    <div class="syntax-label">Horizontal line</div>
+                    <div class="syntax-code">---</div>
+                </div>
+            </div>
+            
+            <!-- Strikethrough Section -->
+            <div class="section">
+                <h3 class="section-title">Strikethrough</h3>
+                <div class="syntax-item">
+                    <div class="syntax-label">Strikethrough text</div>
+                    <div class="syntax-code">~~Strikethrough~~</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tables Section -->
+        <div class="section table-section">
+            <h3 class="section-title">Tables</h3>
+            <div class="table-example">| Column 1 | Column 2 | Column 3 |
+|----------|----------|----------|
+| Row 1, Column 1 | Row 1, Column 2 | Row 1, Column 3 |
+| Row 2, Column 1 | Row 2, Column 2 | Row 2, Column 3 |</div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-text">INFINITE BOOP</div>
+        </div>
+    </div>
+</body>
+</html>
